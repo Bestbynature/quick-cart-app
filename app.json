@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Poppins-Bold.ttf", "./assets/fonts/Poppins-ExtraBold.ttf", "./assets/fonts/Poppins-Regular.ttf"]
+        }
+      ]
+    ]
   }
 }
