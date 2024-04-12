@@ -54,7 +54,7 @@ The "Quick Cart" App is a simple e-commerce application that allows users to vie
 
 [Please check back for the hosted version](#). The video demonstration is given below:
 
-# [QuickCart_App_Demonstration.mp4]()
+# [QuickCart_App_Demonstration.mp4](https://drive.google.com/file/d/1qasRT1y4yfy35U0RANIrHPuuFFKm4_5K/view?usp=sharing)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
