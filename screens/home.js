@@ -2,45 +2,50 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   ScrollView,
-  FlatList,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { globalStyles } from "../styles/global";
 import { foodMenuList } from "../data/info";
-
 import HomeItem from "../components/home-item";
 import Footer from "../components/footer";
 import { useState } from "react";
+import Search from "../components/search";
 
 const Home = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const [cart, setCart] = useState([]);
+  const filteredFoodMenuList = foodMenuList.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.alias.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  
- 
   return (
-    <View style={globalStyles.container}>
-      <Text style={styles.menu}>Menu</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={globalStyles.container}>
+        <Text style={{...styles.menu, ...globalStyles.regp1}}>Menu</Text>
 
-      <View style={styles.body}>
-        <TextInput style={styles.search} placeholder="search" />
+        <View style={styles.body}>
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        <ScrollView>
-          <View style={styles.list}>
-            {foodMenuList.map((item) => (
-              <TouchableOpacity key={item.key} onPress={()=>navigation.navigate("Details", item)}>
-                <HomeItem item={item} />
-              </TouchableOpacity>
-            ))}
-          </View>
-        </ScrollView>
+          <ScrollView>
+            <View style={styles.list}>
+              {filteredFoodMenuList.map((item) => (
+                <TouchableOpacity
+                  key={item.key}
+                  onPress={() => navigation.navigate("Details", item)}
+                >
+                  <HomeItem item={item} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+        <Footer navigation={navigation} cart={false} home={true} />
       </View>
-
-      {/* footer start */}
-      <Footer />
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -49,33 +54,25 @@ export default Home;
 const styles = StyleSheet.create({
   menu: {
     fontSize: 15,
-    padding: 20,
+    padding: 10,
     textAlign: "center",
-    marginTop: 5,
     marginBottom: 10,
     borderBottomWidth: 1,
     borderColor: "#ccc",
+    color: "#151515"
+
   },
   body: {
-    padding: 20,
+    padding: 10,
     flex: 1,
     borderBottomWidth: 1,
     borderColor: "#ccc",
   },
-  search: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    padding: 10,
-    fontSize: 12,
-    borderRadius: 6,
-    marginBottom: 20,
-  },
-
   list: {
     flexDirection: "row",
-    gap: 10,
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     flex: 1,
+    columnGap: 10,
   },
 });

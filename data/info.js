@@ -79,10 +79,10 @@ export const detailsMenuList = [
     item: "Dietary Information", key: "4",
   },
   {
-    item: "Storage Information"
+    item: "Storage Information", key: "5",
   },
   {
-    item: "Extra", key: "5",
+    item: "Extra", key: "6",
   }
 ];
 
